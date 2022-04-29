@@ -11,5 +11,6 @@ public class Practica {
         JOptionPane.showMessageDialog(null,"Hola cómo estás" + name);
 
         System.out.println("Tu no mete cabra saramambiche");
+        System.out.println("Ye, estoy subiendo como espuma");
     }
 }
