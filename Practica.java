@@ -12,5 +12,6 @@ public class Practica {
 
         System.out.println("Tu no mete cabra saramambiche");
         System.out.println("Ye, estoy subiendo como espuma");
+        System.out.println("Prendiendole en la cara al que no fuma");
     }
 }
