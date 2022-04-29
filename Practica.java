@@ -10,6 +10,6 @@ public class Practica {
         name = JOptionPane.showInputDialog("Tu nombre: ");
         JOptionPane.showMessageDialog(null,"Hola cómo estás" + name);
 
-        System.out.println("Sisa pa");
+        System.out.println("Tu no mete cabra saramambiche");
     }
 }
