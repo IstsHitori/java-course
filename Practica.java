@@ -1,14 +1,18 @@
 import java.util.*;
 public class Practica {
     public static Scanner consola = new Scanner(System.in);
-    public static ArrayList <String> usuarios_membresias = new ArrayList <String>();
-    public static String videojuegos_alquilados[];
-    public static ArrayList <String> videojuegos_creados = new ArrayList <String>();
+    public static ArrayList<ArrayList<String>> cursos = new ArrayList<>();
+    public static ArrayList <String> usuarios_membresias = new ArrayList();
+    public static ArrayList <String> videojuegos_alquilados = new ArrayList();
+    public static ArrayList <String> videojuegos_creados = new ArrayList();
 
     public static void main(String[] args) {
         int menu = 0;
+        cursos.add(videojuegos_creados);
+
         while(true){
-            System.out.println("BIENVENIDO, por favor eliga una opción\n");
+            System.out.println(cursos);
+            System.out.println("\nBIENVENIDO, por favor eliga una opción\n");
             System.out.print(
                             "1. Ingreso de clientes para obtener membresía del club\n" +
                             "2. Crear o eliminar un video juego.\n" +
@@ -140,8 +144,20 @@ public class Practica {
     //Tercera funcion
     public static void eliminar_membresia(){
         String nombre;
-        System.out.print("Digite el nombre del usuario: ");
-        nombre = consola.next();
+        int posicion = 0;
+        consola.nextLine();
+        System.out.print("Digite el nombre del usuario al que desea eliminar la membresia: ");
+        nombre = consola.nextLine();
+        posicion = usuarios_membresias.indexOf(nombre);
+
+        if(posicion >= 0){
+            usuarios_membresias.remove(posicion);
+            System.out.println("Usuario eliminado correctamente.");
+        }
+
+        else{
+            System.out.println("Este usuario no existe.");
+        }
     }
 
     //Cuarta funcion
@@ -195,12 +211,12 @@ public class Practica {
     //Novena funcion
 
     public static void verusuarios_conmembresia(){
+        consola.nextLine();
         System.out.println("\nEstos son la lista de clientes que tinene membresia:");
 
         for(int i = 0; i < usuarios_membresias.size(); i++){
             System.out.print(usuarios_membresias.get(i));
         }
-        System.out.println("Presione cualqueir tecla para continuar..");
-        consola.next();
+
     }
 }
