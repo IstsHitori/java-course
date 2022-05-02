@@ -1,27 +1,30 @@
-import java.util.Scanner;
+import java.util.*;
 public class Practica {
     public static Scanner consola = new Scanner(System.in);
-    public static String usuarios_registrados[];
+    public static ArrayList <String> usuarios_membresias = new ArrayList <String>();
     public static String videojuegos_alquilados[];
-    public static String videojuegos_creados[];
+    public static ArrayList <String> videojuegos_creados = new ArrayList <String>();
 
     public static void main(String[] args) {
         int menu = 0;
-        boolean verf = true;
-        while(verf = true){
+        while(true){
             System.out.println("BIENVENIDO, por favor eliga una opción\n");
             System.out.print(
                             "1. Ingreso de clientes para obtener membresía del club\n" +
-                            "2. Crear y eliminar un video juego.\n" +
+                            "2. Crear o eliminar un video juego.\n" +
                             "3. Eliminar una membresía.\n" +
                             "4. Ingresar el alquiler de un juego a un miembro del club.\n" +
                             "5. Ingresar la devolución de un video juego alquilado.\n" +
                             "6. Mostrar los video juegos alquilados y que miembros los tienen.\n" +
                             "7. Mostrar los video juegos que se pueden alquilar.\n" +
                             "8. Mostrar los video juegos alquilados por un cliente especifico.\n" +
-                            "9.Salir.\n:"
+                            "9. Mostrar los clientes con membresia del club.\n" +
+                            "10.Salir.\n:"
             );
             menu = consola.nextInt();
+            if(menu == 10){
+                break;
+            }
             switch (menu){
                 case 1:
                     registrar_usuario();
@@ -56,17 +59,17 @@ public class Practica {
                     break;
 
                 case 9:
-                    verf = false;
+                    verusuarios_conmembresia();
                     break;
 
                 default:
                     System.out.println("Esta opción no existe.");
+
             }
         }
     }
     //Primera función
     public static void registrar_usuario(){
-        int i = 0;
         String nombre;
         int edad;
 
@@ -79,43 +82,59 @@ public class Practica {
         if(edad < 13 ){
             System.out.println("Usted no cumple con los requisitos.\n");
         }
-        usuarios_registrados[i] = nombre;
-        i++;
 
-        for(int a = 0; a < usuarios_registrados.length; a++){
-            System.out.print(usuarios_registrados[a]);
-        }
+        usuarios_membresias.add(nombre);
 
         System.out.println("");
     }
 
     //Segunda funcion
     public static void crear_eliminar_videojuego(){
-        int i = 0;
-        boolean verificar = false;
-        String crear_videojuego, eliminar_videojuego;
+        int opcion = 0;
+        int posicion;
+        String crear;
+        String eliminar;
+        while(true){
+            boolean verf = false;
+            System.out.print("1.Crear Videojuego\n2.Eliminar Videojuego\n:");
+            opcion = consola.nextInt();
 
-        System.out.print("Qué juego desea crear: ");
-        crear_videojuego = consola.next();
+            if(opcion == 1){
+                consola.nextLine();
+                System.out.print("Dame el nombre del videojuego que deseas crear: ");
+                crear = consola.nextLine();
+                videojuegos_creados.add(crear);
+                break;
+            }
+            else if(opcion == 2){
+                consola.nextLine();
+                System.out.print("Dame el nombre del videojuego que deseas eliminar: ");
+                eliminar = consola.nextLine();
 
-        videojuegos_creados[i] = crear_videojuego;
+                posicion = videojuegos_creados.indexOf(eliminar);
 
-        System.out.println("Qué juego desea eliminar: ");
-        eliminar_videojuego = consola.next();
+                if(posicion >= 0){
+                    for(int i = 0; i < videojuegos_creados.size(); i++){
+                        videojuegos_creados.remove(posicion);
+                        verf = true;
+                    }
+                }
 
-        for(int j = 0; j < videojuegos_creados.length; j++){
-            if(eliminar_videojuego == videojuegos_creados[j]){
-                videojuegos_creados[i] = null;
-                System.out.println("Se encontró el videojuego y ha sido eliminado.");
-                verificar = true;
+                if(verf == true){
+                    System.out.println("El videojuego se ha eliminado.");
+                    System.out.print(videojuegos_creados);
+                }
+
+                else if (verf == false){
+                    System.out.println("Este videojuego no ha sido encontrado.");
+                }
+                break;
             }
 
-            else if(j == videojuegos_creados.length && verificar == false){
-                System.out.println("No se encontró el videojuego.");
+            else{
+                System.out.println("Esta opción no existe.");
             }
         }
-
-        i++;
     }
 
     //Tercera funcion
@@ -171,5 +190,17 @@ public class Practica {
 
         System.out.print("Dame tu nombre: ");
         name = consola.next();
+    }
+
+    //Novena funcion
+
+    public static void verusuarios_conmembresia(){
+        System.out.println("\nEstos son la lista de clientes que tinene membresia:");
+
+        for(int i = 0; i < usuarios_membresias.size(); i++){
+            System.out.print(usuarios_membresias.get(i));
+        }
+        System.out.println("Presione cualqueir tecla para continuar..");
+        consola.next();
     }
 }
