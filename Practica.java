@@ -1,18 +1,21 @@
+import javax.xml.namespace.QName;
 import java.util.*;
+
+//@Creado By Francisco
+
 public class Practica {
     public static Scanner consola = new Scanner(System.in);
-    public static ArrayList<ArrayList<String>> cursos = new ArrayList<>();
+    public static ArrayList<String> juegos = new ArrayList<>();
+    public static HashMap<String, ArrayList<String>> usuarios_con_videojuegos_alquilados = new HashMap<>();
     public static ArrayList <String> usuarios_membresias = new ArrayList();
     public static ArrayList <String> videojuegos_alquilados = new ArrayList();
     public static ArrayList <String> videojuegos_creados = new ArrayList();
 
     public static void main(String[] args) {
         int menu = 0;
-        cursos.add(videojuegos_creados);
 
         while(true){
-            System.out.println(cursos);
-            System.out.println("\nBIENVENIDO, por favor eliga una opción\n");
+            System.out.println("\nBIENVENIDO\nPor favor elija una opción\n");
             System.out.print(
                             "1. Ingreso de clientes para obtener membresía del club\n" +
                             "2. Crear o eliminar un video juego.\n" +
@@ -88,7 +91,6 @@ public class Practica {
         }
 
         usuarios_membresias.add(nombre);
-
         System.out.println("");
     }
 
@@ -162,29 +164,78 @@ public class Practica {
 
     //Cuarta funcion
     public static void registrar_videojuego_miembro(){
+        videojuegos_alquilados.clear();
+        int posicion,posicion2;
         String nombre,juego;
         int dias;
-
         System.out.print("Dame tu nombre: ");
         nombre = consola.next();
-        System.out.print("Qué juego deseas registrar: ");
-        juego = consola.next();
-        System.out.print("Cuántos días te llevarás el juego: ");
-        dias = consola.nextInt();
 
+        posicion = usuarios_membresias.indexOf(nombre);
+
+
+        if(posicion >= 0){
+            consola.nextLine();
+            System.out.print("Qué juego deseas registrar: ");
+            juego = consola.nextLine();
+
+            posicion2 = videojuegos_creados.indexOf(juego);
+            if(posicion2 < 0){
+                System.out.println("Este juego no está en la lista de juegos disponibles.");
+            }
+
+            else{
+                System.out.print("Cuántos días te llevarás el juego: ");
+                dias = consola.nextInt();
+
+                videojuegos_alquilados.add(juego);
+                usuarios_con_videojuegos_alquilados.put(nombre,videojuegos_alquilados);
+            }
+        }
+
+        else{
+            System.out.println("Este usuario no está registrado en la lista de miembros.");
+        }
     }
 
     //Quinta funcion
 
-    public static void devolucion_videojuego(){
+    public static void devolucion_videojuego() {
         String videojuego;
         String nombre;
+        int posicion;
 
         System.out.print("Dame tu nombre: ");
         nombre = consola.next();
+        posicion = usuarios_membresias.indexOf(nombre);
 
-        System.out.print("Qué videojuego deseas regresar: ");
-        videojuego = consola.next();
+        if(posicion >= 0){
+            if(usuarios_con_videojuegos_alquilados.get(nombre) == null){
+                System.out.println("No tienes juegos alquilados.");
+            }
+            else{
+                System.out.println("Estos son tus videojuegos alquilado:");
+                System.out.println(usuarios_con_videojuegos_alquilados.get(nombre));
+                juegos = usuarios_con_videojuegos_alquilados.get(nombre);
+                consola.nextLine();
+                System.out.print("Cual desea regresar: ");
+                videojuego = consola.nextLine();
+                posicion = juegos.indexOf(videojuego);
+            }
+
+            if(posicion >= 0){
+                usuarios_con_videojuegos_alquilados.remove(nombre,posicion);
+                juegos.clear();
+            }
+
+            else{
+                System.out.println("El juego que deseas eliminar no existe.");
+            }
+        }
+
+        else{
+            System.out.println("No estás en la lista de miembros del club.");
+        }
     }
 
     //Sexta funcion
@@ -212,11 +263,16 @@ public class Practica {
 
     public static void verusuarios_conmembresia(){
         consola.nextLine();
-        System.out.println("\nEstos son la lista de clientes que tinene membresia:");
+        System.out.println("\nEstos son la lista de clientes que tienen membresia:");
 
         for(int i = 0; i < usuarios_membresias.size(); i++){
             System.out.print(usuarios_membresias.get(i));
         }
+        System.out.println("");
+
+        System.out.print(usuarios_con_videojuegos_alquilados);
+
+        System.out.println("");
 
     }
 }
