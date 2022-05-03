@@ -1,4 +1,4 @@
-import javax.xml.namespace.QName;
+
 import java.util.*;
 
 //@Creado By Francisco
@@ -9,6 +9,7 @@ public class Practica {
     public static HashMap<String, ArrayList<String>> usuarios_con_videojuegos_alquilados = new HashMap<>();
     public static ArrayList <String> usuarios_membresias = new ArrayList();
     public static ArrayList <String> videojuegos_alquilados = new ArrayList();
+    public static ArrayList <String> videojuegos_alquilados_no_eliminados = new ArrayList();
     public static ArrayList <String> videojuegos_creados = new ArrayList();
 
     public static void main(String[] args) {
@@ -189,6 +190,7 @@ public class Practica {
                 dias = consola.nextInt();
 
                 videojuegos_alquilados.add(juego);
+                videojuegos_alquilados_no_eliminados.add(juego);
                 usuarios_con_videojuegos_alquilados.put(nombre,videojuegos_alquilados);
             }
         }
@@ -240,39 +242,77 @@ public class Practica {
 
     //Sexta funcion
 
-    public static void mostrar_videojuegos_alquilados(){
-        System.out.print("Estos son los videojuegos alquilados: ");
+    public static void mostrar_videojuegos_alquilados() {
+        if(videojuegos_alquilados_no_eliminados.size() == 0){
+            System.out.println("No hay videojuegos alquilados.");
+        }
+
+        else{
+            System.out.println("Estos son los videojuegos alquilados: ");
+            videojuegos_alquilados_no_eliminados.forEach(System.out::println);
+
+            System.out.println("\nEstos son los miembros que tienen estos juegos alquilados: ");
+            System.out.println(usuarios_con_videojuegos_alquilados);
+        }
     }
 
     //Septima funcion
 
     public static void mostrar_videojuegos_disponibles(){
-        System.out.print("Estos son los videojuegos disponibles para alquilar: ");
+        if(videojuegos_creados.size() == 0){
+            System.out.println("No hay videojuegos disponibles para alquilar.");
+        }
+
+        else{
+            System.out.println("Estos son los videojuegos disponibles para alquilar: ");
+
+            videojuegos_creados.forEach(System.out::println);
+        }
     }
 
     //Octava funcion
 
     public static void videojuegoalquilado_porcliente(){
         String name;
+        int posicion;
+        if(usuarios_con_videojuegos_alquilados.size() == 0){
+            System.out.println("No hay usuarios con videojuegos registrados.");
 
-        System.out.print("Dame tu nombre: ");
-        name = consola.next();
+        }
+
+        else{
+            System.out.print("Dame tu nombre: ");
+            name = consola.next();
+
+            posicion = usuarios_membresias.indexOf(name);
+
+            if(posicion >= 0){
+                System.out.println("Estos son los juegos alquilados del usuario: ");
+                System.out.println(usuarios_con_videojuegos_alquilados.get(name));
+            }
+
+            else{
+                System.out.println("No existe este usuario en la lista de miembros");
+            }
+
+        }
     }
 
     //Novena funcion
 
     public static void verusuarios_conmembresia(){
         consola.nextLine();
-        System.out.println("\nEstos son la lista de clientes que tienen membresia:");
-
-        for(int i = 0; i < usuarios_membresias.size(); i++){
-            System.out.print(usuarios_membresias.get(i));
+        if(usuarios_membresias.size() == 0){
+            System.out.println("No hay usuarios con membresia en el club.");
         }
-        System.out.println("");
 
-        System.out.print(usuarios_con_videojuegos_alquilados);
+        else{
+            System.out.println("\nEstos son la lista de clientes que tienen membresia:");
 
-        System.out.println("");
-
+            for(int i = 0; i < usuarios_membresias.size(); i++){
+                System.out.print(usuarios_membresias.get(i));
+            }
+            System.out.println("");
+        }
     }
 }
