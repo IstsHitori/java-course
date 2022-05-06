@@ -20,7 +20,7 @@ public class ClaseArrays6 {
         centavos =(valor - (int)valor) * 100;
         centavos = (int)centavos;
         centenas =(int) (valor / 100);
-        decenas = (int) (valor - 100)/100;
+        decenas = (int) (valor - (centenas * 100))/10;
         unidades = (int) valor % 10;
 
         System.out.print("Centavos "+ centavos + " unidades " + unidades+" decenas "  + decenas+ " centenas "  + centenas + "\n");
@@ -34,8 +34,8 @@ public class ClaseArrays6 {
 
         moneda50 = moneda / 50;
         if(moneda50 >= 1){
-            moneda50 = moneda50;
-            moneda = moneda - 50;
+            //moneda50 = moneda50;
+            moneda = moneda % 50;
         }
         else{
             moneda50 = 0;
@@ -43,8 +43,8 @@ public class ClaseArrays6 {
 
         moneda25 = moneda / 25;
         if(moneda25 >= 1){
-            moneda25 = moneda25;
-            moneda = moneda - 25;
+            //moneda25 = moneda25;
+            moneda = moneda % 25;
         }
         else {
             moneda25 = 0;
@@ -52,8 +52,8 @@ public class ClaseArrays6 {
 
         moneda10 = moneda/10;
         if(moneda10>= 1){
-            moneda10 = moneda10;
-            moneda = moneda - 10;
+            //moneda10 = moneda10;
+            moneda = moneda % 10;
         }
         else{
             moneda10 = 0;
@@ -61,11 +61,11 @@ public class ClaseArrays6 {
 
         moneda_1 = moneda / 1;
         if(moneda_1 >= 1){
-            moneda_1 = moneda_1;
-            moneda = moneda - 1;
+            //moneda_1 = moneda_1;
+            moneda = moneda % 1;
         }
         else{
-            moneda = 0;
+            moneda_1 = 0;
         }
 
         System.out.println("monedas de 50 centavo : " + moneda50);
@@ -74,6 +74,6 @@ public class ClaseArrays6 {
         System.out.println("monedas de 5 centavo : " + moneda5);
         System.out.println("monedas de 1 centavo : " + moneda_1);
 
-        return moneda;
+        return moneda_1;
     }
 }
