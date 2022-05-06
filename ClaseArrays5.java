@@ -81,7 +81,6 @@ public class ClaseArrays5 {
                 System.out.print("\nEscriba el codigo del producto que desea: ");
                 codigos = consola.nextLine();
 
-
                 String seccion = null;
                 for(int i = 0; i < 3; i++){
                     if(codigoNiños[i].contains(codigos)){
@@ -126,8 +125,9 @@ public class ClaseArrays5 {
                     }
                 }
 
-                if(verf = true){
+                if(verf == true){
                     calcularPrecio(codigos,C,P,D);
+                    System.out.println(verf);
                 }
 
                 else if(verf == false){
