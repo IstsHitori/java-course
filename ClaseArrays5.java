@@ -12,7 +12,7 @@ public class ClaseArrays5 {
 
     public static void main(String[] args) {
         Scanner consola = new Scanner(System.in);
-        boolean verf = false;
+        boolean verf = true;
 
         int contador_productoNiños = 0,contador_productosJuguetes = 0,contador_productos_Hombres = 0;
         int opcion;
@@ -29,8 +29,8 @@ public class ClaseArrays5 {
         String codigoHombre[] = {"PSU-4542","PSU-4543","PSU-4544"};
         //Precio y descuentos de los productos
         int descuentoNiños[] = {0,55,53};
-        int descuentoJuguetes[] = {30,20,10};
-        int descuentoHombres[] = {20,30,40};
+        int descuentoJuguetes[] = {30,70,10};
+        int descuentoHombres[] = {20,30,55};
 
         float precioNiños[] = {22.22F, 56.65F, 32.00F};
         float precioJuguetes[] = {30,00F,20,00F,12.00F};
@@ -43,19 +43,19 @@ public class ClaseArrays5 {
 
             if(opcion == 1){
                 System.out.println("Estos son los productos con mas del 50% de descuento: ");
-                for(int i = 0; i < precioNiños.length; i++){
-                    if(precioNiños[i] > 50){
+                for(int i = 0; i < descuentoNiños.length; i++){
+                    if(descuentoNiños[i] > 50){
                         System.out.print(productosNiños[i]+",");
                     }
                 }
-                for(int i = 0; i < precioJuguetes.length; i++){
-                    if(precioJuguetes[i] > 50){
+                for(int i = 0; i < descuentoJuguetes.length; i++){
+                    if(descuentoJuguetes[i] > 50){
                         System.out.print(productosJuguetes[i]+",");
                     }
                 }
-                for(int i = 0; i < precioHombre.length; i++){
-                    if(precioHombre[i] > 50){
-                        System.out.print(productosHombre[i]);
+                for(int i = 0; i < descuentoHombres.length; i++){
+                    if(descuentoHombres[i] > 50){
+                        System.out.print(productosHombre[i]+",");
                     }
                 }
                 System.out.println("\n");
@@ -79,7 +79,7 @@ public class ClaseArrays5 {
 
                 consola.nextLine();
                 System.out.print("\nEscriba el codigo del producto que desea: ");
-                codigos = consola.nextLine();
+                codigos = consola.next();
 
                 String seccion = null;
                 for(int i = 0; i < 3; i++){
@@ -94,9 +94,9 @@ public class ClaseArrays5 {
                             S.add(seccion);
                             contador_productoNiños++;
                         }
+                        break;
                     }
                     else if(codigoJuguetes[i].contains(codigos)){
-
                         verf = true;
                         codigos = codigoJuguetes[i];
                         seccion = secciones[1];
@@ -107,6 +107,7 @@ public class ClaseArrays5 {
                             S.add(seccion);
                             contador_productosJuguetes++;
                         }
+                        break;
                     }
                     else if(codigoHombre[i].contains(codigos)){
                         verf = true;
@@ -119,6 +120,7 @@ public class ClaseArrays5 {
                             S.add(seccion);
                             contador_productos_Hombres++;
                         }
+                        break;
                     }
                     else {
                         verf = false;
@@ -127,7 +129,6 @@ public class ClaseArrays5 {
 
                 if(verf == true){
                     calcularPrecio(codigos,C,P,D);
-                    System.out.println(verf);
                 }
 
                 else if(verf == false){
@@ -158,6 +159,7 @@ public class ClaseArrays5 {
             if(C.get(i).equals(codigo)){
                 posicion = i;
                 verf = true;
+                break;
             }
             else{
                 verf = false;
