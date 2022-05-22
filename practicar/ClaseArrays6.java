@@ -1,3 +1,5 @@
+package practicar;
+
 import java.util.Scanner;
 
 public class ClaseArrays6 {

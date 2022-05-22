@@ -1,3 +1,5 @@
+package practicar;
+
 import java.util.*;
 
 public class HashMaps{

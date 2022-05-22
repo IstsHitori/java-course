@@ -1,3 +1,4 @@
+package practicar;
 
 import java.util.Scanner;
 import java.util.*;
