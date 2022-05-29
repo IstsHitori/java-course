@@ -8,6 +8,8 @@ public class CalcularNota {
     private float nota3;
     private String NombreMateria;
 
+    private float nota;
+
     public CalcularNota(float nota1, float nota2, float nota3, String NombreMateria){
         this.nota1 = nota1;
         this.nota2 = nota2;
@@ -47,8 +49,12 @@ public class CalcularNota {
         NombreMateria = NombreMateria;
     }
 
+    public float getNota(){
+        return nota;
+    }
+
     public float calcular_nota(){
-        float nota;
+
 
         nota = (float) ((nota1 * 0.30) + (nota2 * 0.30) + (nota3 * 0.40));
 

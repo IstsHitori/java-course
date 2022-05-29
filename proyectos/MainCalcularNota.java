@@ -3,9 +3,34 @@ import javax.swing.*;
 public class MainCalcularNota {
     public static void verNotas(CalcularNota notas[]){
         for(int i = 0; i < notas.length; i++){
-            JOptionPane.showMessageDialog(null, "Notas: " + notas[i].calcular_nota());
+            JOptionPane.showMessageDialog(null, "Notas:\n" + notas[i].getNombreNota() + " : " + notas[i].getNota());
 
         }
+    }
+
+    public static float verNotaMateria(CalcularNota notas[],String nombreNota){
+        float nota = 0;
+        boolean verf = true;
+
+        for(int i = 0; i < notas.length; i++){
+            if((notas[i].getNombreNota()).equals(nombreNota)){
+                nota = notas[i].getNota();
+                verf = true;
+                break;
+            }
+            else{
+                verf = false;
+            }
+        }
+
+        if(verf == false){
+            JOptionPane.showMessageDialog(null,"No se encontró la nota de esta materia.");
+        }
+
+        else{
+            JOptionPane.showMessageDialog(null,"La nota de la materia " + nombreNota + " es " + nota);
+        }
+        return nota;
     }
     public static void main(String[] args) {
 
@@ -52,7 +77,13 @@ public class MainCalcularNota {
                    }
 
                    notas[i] = new CalcularNota(nota1,nota2,nota3,nombreNota);
+                   notas[i].calcular_nota();
                }
+
+                if(notas.length == 1){
+                    JOptionPane.showMessageDialog(null,"BYE!");
+                    break;
+                }
            }
             else if(opcion == 2){
                //Llamar el metodo toString para ver las notas actuales
@@ -66,7 +97,13 @@ public class MainCalcularNota {
                }
            }
             else if(opcion == 3){
-               //ver notas por materia
+                if(notas[0] == null){
+                    JOptionPane.showMessageDialog(null,"No hay notas registradas actualmente.");
+                }
+                else{
+                    String materia = JOptionPane.showInputDialog("Nombre de la materia que deseas saber la nota: ");
+                    verNotaMateria(notas,materia);
+                }
             }
             else if(opcion == 4){
                JOptionPane.showMessageDialog(null,"\tBYE!");
