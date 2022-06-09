@@ -1,4 +1,5 @@
 package proyectos;
+
 import javax.swing.*;
 public class MainCalcularNota {
     public static void verNotas(CalcularNota notas[]){
