@@ -1,22 +1,23 @@
 package clases2;
 
 public abstract class Poligono {
-    protected int numeroLados;
-    public Poligono(){
-
+    protected int nLados;
+    public Poligono(int nLados){
+        this.nLados = nLados;
     }
 
-    public Poligono(int numeroLados){
-        this.numeroLados = numeroLados;
+    public int getnLados() {
+        return nLados;
     }
 
-    public int getNumeroLados(){
-        return numeroLados;
+    public void setnLados(int nLados) {
+        this.nLados = nLados;
     }
 
     public abstract double area();
+
     @Override
     public String toString(){
-        return "Numero de lados: " + numeroLados;
+        return "numero de lados: " + nLados;
     }
 }
