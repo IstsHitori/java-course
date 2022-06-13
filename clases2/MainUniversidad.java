@@ -2,12 +2,21 @@ package clases2;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class MainUniversidad {
+    //Creamos un array de tipo Asignatura para registrar las materias con sus maestros
     static Asignatura materias_registradas[];
+
     static Scanner consola = new Scanner(System.in);
 
+    /*
+    Creamos un objeto estatico de tipo alumno para ingresar sus respectivos atributos después
+     */
+
     static Alumno alumno1;
+    //Creamos un array statico de tipo ALumno para almacenar todos los alumnos
 
     static ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+
+    //Creamos el metodo "registrarAlumno" para registrar el alumno y así introducirlo al arraylist "alumnos"
     public static void registrarAlumno() {
 
         consola.nextLine();
@@ -32,7 +41,7 @@ public class MainUniversidad {
         while(true){
             System.out.print("Cedula o T.I del alumno:");
             cedula = consola.nextLine();
-
+            //Verifica que la cedula sea de 10 caracteres
             if(cedula.length() < 10 || cedula.length() > 10){
                 System.out.println("La cedula o T.I debe tener 10 caracteres.");
             }
@@ -51,7 +60,7 @@ public class MainUniversidad {
 
             System.out.print("Nombre del maestro de la " + (i+1) + " Materia:");
             String name_maestro = consola.nextLine();
-
+            //Introducimos al array en su respectiva posicion el tipo de objeto asignatura con sus parametros
             materias_registradas[i] = new Asignatura(name_materia,name_maestro);
         }
         Alumno alumno1 = new Alumno(nombre,apellido,edad,cedula,materias_registradas);

@@ -1,5 +1,5 @@
 package proyectos;
-
+import java.util.Scanner;
 public class Empleado {
     protected String nombre;
     protected String apellido;
@@ -8,6 +8,8 @@ public class Empleado {
     protected int añosAntiguedad;
     protected int telefono;
     protected double salario;
+
+    public static Scanner consola = new Scanner(System.in);
 
     public Empleado(){
 
@@ -79,7 +81,23 @@ public class Empleado {
         this.salario = salario;
     }
 
+    public void cambiarSupervisor(){
+
+    }
+
+    public void incrementarSalario(double incremento){
+        int años = 0;
+        double total_incremento = 0;
+
+        //Incrementar el salario mediante años trabajados
+        System.out.print("Cuantos años ha trabajado: ");
+        años = consola.nextInt();
+        total_incremento = años * incremento;
+        salario += (salario * total_incremento);
+    }
+
+    @Override
     public String toString(){
-        return "Nombre: " + nombre + "\nApellido: " + apellido + "\nDNI " + DNI + "\nDireccion: " +direccion+ "\nAños de antiguedad: " + añosAntiguedad + "Telefono: " + telefono + "Salario " + salario;
+        return "Nombre: " + nombre + "\nApellido: " + apellido + "\nDNI " + DNI + "\nDireccion: " +direccion+ "\nAños de antiguedad: " + añosAntiguedad + "\nTelefono: " + telefono + "\nSalario " + salario;
     }
 }
