@@ -6,16 +6,18 @@ public class JefeDeZona extends Empleado {
     private String despacho;
     private Secretario secretario;
     private Coche coche_empresa;
+    private ArrayList<Vendedor> vendedores = new ArrayList<>();
     private double incremento = 0.20;
 
     public JefeDeZona(){
 
     }
-    public JefeDeZona(String nombre,String apellido,String DNI,String direccion, int añosAntiguedad, int telefono, double salario, String despacho, Secretario secretario,Coche coche_empresa){
+    public JefeDeZona(String nombre,String apellido,String DNI,String direccion, int añosAntiguedad, int telefono, double salario, String despacho, Secretario secretario,Coche coche_empresa,ArrayList<Vendedor> vendedores){
         super(nombre, apellido, DNI, direccion, añosAntiguedad, telefono, salario);
         this.despacho = despacho;
         this.secretario = secretario;
         this.coche_empresa = coche_empresa;
+        this.vendedores = vendedores;
     }
 
     public String getDespacho() {
@@ -113,6 +115,7 @@ public class JefeDeZona extends Empleado {
 
 
     public void darDeAltaVendedor(ArrayList<Vendedor> vendedores,ArrayList<Cliente> clientes){
+        consola.nextLine();
         String nombre,apellido,DNI,direccion,areaDeventa;
         String matricula,marca,modelo;
         int añosAntiguedad,telefono;
@@ -200,7 +203,7 @@ public class JefeDeZona extends Empleado {
 
     @Override
     public String toString(){
-        return  "Datos del Jefe De Zona:\n" + super.toString() + "\nDatos del coche: " + coche_empresa.toString();
+        return  "Datos del Jefe De Zona:\n" + super.toString() + "\nDatos del coche: " + coche_empresa.toString() + "\nLista de vendedores: " + vendedores.toString();
     }
 }
 

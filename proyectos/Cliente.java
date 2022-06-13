@@ -5,13 +5,16 @@ public class Cliente{
     private String apellido_cliente;
     private long telefono_cliente;
 
+    private String ID;
+
     public Cliente(){
 
     }
-    public Cliente(String nombre_cliente, String apellido_cliente, long telefono_cliente){
+    public Cliente(String nombre_cliente, String apellido_cliente, long telefono_cliente,String ID){
         this.nombre_cliente = nombre_cliente;
         this.apellido_cliente = apellido_cliente;
         this.telefono_cliente = telefono_cliente;
+        this.ID = ID;
     }
 
     public String getNombre_cliente() {
@@ -38,9 +41,17 @@ public class Cliente{
         this.telefono_cliente = telefono_cliente;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     @Override
 
     public String toString(){
-        return "Datos del cliente:\n" + "Nombre:" + nombre_cliente + "Apellido:" + apellido_cliente + "Numero telefonico:" + telefono_cliente;
+        return "ID:" + ID + "\nNombre:" + nombre_cliente + "\nApellido:" + apellido_cliente + "\nNumero telefonico:" + telefono_cliente + "\n<<---------------->>";
     }
 }

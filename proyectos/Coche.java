@@ -41,6 +41,6 @@ public class Coche {
     }
     @Override
     public String toString(){
-        return "Datos del coche:" + "\nMatricula: " + matricula + "\nMarca:" + marca + "\nModelo:" + modelo;
+        return "\nDatos del coche:" + "\nMatricula: " + matricula + "\nMarca:" + marca + "\nModelo:" + modelo;
     }
 }

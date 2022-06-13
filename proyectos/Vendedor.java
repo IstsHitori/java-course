@@ -47,66 +47,68 @@ public class Vendedor extends Empleado{
 
     //Regitrar un cliente a la lista de clientes
     public void darAltaCliente(ArrayList<Cliente> clientes){
+        consola.nextLine();
         boolean verificar = true;
         System.out.println("\n<<Registrar cliente>>\n");
 
+        String nombre_cliente,apellido_cliente,ID;
+        long telefono_cliente;
+
+        System.out.print("ID del cliente:");
+        ID = consola.nextLine();
+
+        System.out.print("Nombre del cliente:");
+        nombre_cliente = consola.nextLine();
+
+        System.out.print("Apellido del cliente:");
+        apellido_cliente =  consola.nextLine();
+
+        System.out.print("Numero telefonico del cliente:");
+        telefono_cliente = consola.nextLong();
+
+        Cliente cliente1 = new Cliente(nombre_cliente,apellido_cliente,telefono_cliente,ID);
+
+        clientes.add(cliente1);
+
+    }
+
+    //Eliminar un cliente de la lista de clientes
+    public void darBajaCliente(ArrayList<Cliente> clientes){
+        consola.nextLine();
+        String ID;
+        boolean verificar = false;
+        System.out.println("\n<<Eliminar cliente>>\n");
         if(clientes.size() == 0){
-            System.out.println("----NO HAY CLIENTES REGISTRADOS----");
+            System.out.println("LA LISTA DE CLIENTES ESTA VACIA");
         }
         else{
-            System.out.println("Lista de clientes:\n");
+            //Imprimimos la lista de clientes del arraylist "Clientes"
+            System.out.println("\nLista de clientes:\n");
+            for(Cliente ncliente : clientes){
+                System.out.println(ncliente.toString());
+                System.out.println("<<----------------->>");
+            }
+            System.out.print("Dame el DNI del cliente que desea eliminar:");
+            ID = consola.nextLine();
 
             for(Cliente ncliente : clientes){
-                System.out.println(ncliente);
+                //Si esta condicional se cumple eliminaremos el cliente del arraylist "clientes"
+                if(ncliente.getID().equals(ID)){
+                    verificar = true;
+                    System.out.println("Se ha eliminado el cliente " + ncliente.getNombre_cliente() + " correctamente.");
+                    clientes.remove(ncliente);
+                    break;
+                }
+                else{
+                    verificar = false;
+                }
             }
-
-            String nombre_cliente,apellido_cliente;
-            long telefono_cliente;
-
-            System.out.print("Nombre del cliente:");
-            nombre_cliente = consola.nextLine();
-
-            System.out.print("Apellido del cliente:");
-            apellido_cliente =  consola.nextLine();
-
-            System.out.print("Numero telefonico del cliente:");
-            telefono_cliente = consola.nextLong();
-
-            Cliente cliente1 = new Cliente(nombre_cliente,apellido_cliente,telefono_cliente);
-
-            clientes.add(cliente1);
-        }
-    }
-    public void darBajaCliente(ArrayList<Cliente> clientes){
-        int telefono_cliente;
-        boolean verificar = true;
-        System.out.println("\n<<Eliminar cliente>>\n");
-        //Imprimimos la lista de clientes del arraylist "Clientes"
-        System.out.println("\nLista de clientes:\n");
-        for(Cliente ncliente : clientes){
-            System.out.println(ncliente.toString());
-        }
-        System.out.print("Dame el numero telefonico del cliente");
-        telefono_cliente = consola.nextInt();
-
-        for(Cliente ncliente : clientes){
-            //Si esta condicional se cumple eliminaremos el cliente del arraylist "clientes"
-            if(ncliente.getTelefono_cliente() == telefono_cliente){
-                verificar = true;
-                System.out.println("Se ha eliminado el cliente " + ncliente.getNombre_cliente() + " correctamente.");
-                clientes.remove(ncliente);
-                break;
+            if(verificar == true){
+                System.out.println("Proceso de eliminacion de cliente finalizado correctamente.");
             }
             else{
-                verificar = false;
+                System.out.println("No se encontro este cliente en la lista de clientes, proceso errado.");
             }
-        }
-
-        if(verificar == true){
-            System.out.println("Proceso de eliminacion de cliente finalizado correctamente.");
-        }
-        else{
-            System.out.println("No se encontro este cliente en la lista de clientes, proceso errado.");
         }
     }
 
@@ -128,6 +130,14 @@ public class Vendedor extends Empleado{
         }
 
         salario += total_incremento;
+    }
+
+    public void incrementarSalarioAnual(){
+        int años;
+        System.out.println("Cuantos años nuevos a vuelto a trabajar: ");
+        años = consola.nextInt();
+
+        salario = salario + ( salario * (años * incrementoSalario));
     }
 
     public void cambiarCoche(){

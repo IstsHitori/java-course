@@ -85,7 +85,7 @@ public class Empleado {
 
     }
 
-    public void incrementarSalario(double incremento){
+    public double incrementarSalario(double incremento){
         int años = 0;
         double total_incremento = 0;
 
@@ -94,6 +94,7 @@ public class Empleado {
         años = consola.nextInt();
         total_incremento = años * incremento;
         salario += (salario * total_incremento);
+        return salario;
     }
 
     @Override

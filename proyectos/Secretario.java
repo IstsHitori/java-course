@@ -35,6 +35,14 @@ public class Secretario extends Empleado{
         this.incremento = incremento;
     }
 
+    public void incrementarSalario(){
+        int años;
+        System.out.print("Cuantos años nuevos a vuelto a trabajar: ");
+        años = consola.nextInt();
+
+        salario = salario + ( salario * (años * incremento));
+    }
+
     @Override
     public String toString(){
         return "Datos del secretario:\n"+ super.toString() +"\nDespacho: " +despacho + "\nNumero de fax:" + numeroFax;
