@@ -113,58 +113,52 @@ public class JefeDeZona extends Empleado {
         coche_empresa.setModelo(modelo);
     }
 
+    public void incrementarSalario(){
+        int años;
+        System.out.println("Cuantos años nuevos a vuelto a trabajar: ");
+        años = consola.nextInt();
 
-    public void darDeAltaVendedor(ArrayList<Vendedor> vendedores,ArrayList<Cliente> clientes){
+        salario = salario + ( salario * (años * incremento));
+    }
+
+
+    public void darDeAltaVendedor(ArrayList<Vendedor> vendedores){
+        //
         consola.nextLine();
-        String nombre,apellido,DNI,direccion,areaDeventa;
-        String matricula,marca,modelo;
-        int añosAntiguedad,telefono;
-        double salario;
-        Coche coche_empresa2;
-        Vendedor vendedor;
+        boolean verificar_vendedor = false;
 
-        System.out.print("Nombre del vendedor: ");
-        nombre = consola.nextLine();
-
-        System.out.print("Apellido del vendedor: ");
-        apellido = consola.nextLine();
-
-        System.out.print("DNI del vendedor: ");
+        for(Vendedor ver_vendedores : vendedores){
+            System.out.println(ver_vendedores.toString());
+            System.out.println("<<-------------->>");
+        }
+        System.out.println("Estos son los vendedores,escriba el DNI del vendedor que desea agregar: ");
         DNI = consola.nextLine();
 
-        System.out.print("Direccion del vendedor: ");
-        direccion = consola.nextLine();
+        for(Vendedor buscar_vendedor : vendedores){
+            if(buscar_vendedor.getDNI().equals(DNI)){
+                verificar_vendedor = true;
 
-        System.out.print("Años de antiguedad del vendedor:");
-        añosAntiguedad = consola.nextInt();
+                Vendedor vendedor = new Vendedor(buscar_vendedor.getNombre(),buscar_vendedor.getApellido(), buscar_vendedor.getDNI(), buscar_vendedor.getDireccion(), buscar_vendedor.getAñosAntiguedad(), buscar_vendedor.getTelefono(), buscar_vendedor.getSalario(),buscar_vendedor.getCocheEmpresa(),buscar_vendedor.getClientes(),buscar_vendedor.getAreaDeventa());
+                vendedores.add(vendedor);
+                break;
+            }
+            else{
+                verificar_vendedor = false;
+            }
+        }
 
-        System.out.print("Telefono del vendedor: ");
-        telefono = consola.nextInt();
-
-        System.out.print("Salario del vendedor: ");
-        salario = consola.nextDouble();
-
-        System.out.print("Matricula del coche del vendedor: ");
-        matricula = consola.nextLine();
-
-        System.out.print("Marca del coche del vendedor: ");
-        marca = consola.nextLine();
-
-        System.out.print("Modelo del coche del vendedor: ");
-        modelo = consola.nextLine();
-
-        System.out.print("Area de venta del vendedor: ");
-        areaDeventa = consola.nextLine();
-
-        coche_empresa2 = new Coche(matricula,marca,modelo);
-
-        vendedor = new Vendedor(nombre,apellido,DNI,direccion,añosAntiguedad,telefono,salario,coche_empresa2,clientes,areaDeventa);
-
-        vendedores.add(vendedor);
+        if(verificar_vendedor == true){
+            System.out.println("Se ha registrado el vendedor a jefe de zona correctamente.");
+        }
+        else{
+            System.out.println("No se registró el vendedor al jefe.\n");
+        }
+        //
 
     }
 
     public void darDeBajaVendedor(ArrayList<Vendedor> vendedores){
+        consola.nextLine();
         String DNI;
         boolean verificar = true;
 
@@ -182,7 +176,7 @@ public class JefeDeZona extends Empleado {
             System.out.print("Dame el DNI del vendedor que deseas eliminar:");
             DNI = consola.nextLine();
             for(Vendedor vende : vendedores){
-                if(vende.getDNI() == DNI){
+                if(vende.getDNI().equals(DNI)){
                     verificar = true;
                     vendedores.remove(vende);
                     break;
@@ -203,7 +197,7 @@ public class JefeDeZona extends Empleado {
 
     @Override
     public String toString(){
-        return  "Datos del Jefe De Zona:\n" + super.toString() + "\nDatos del coche: " + coche_empresa.toString() + "\nLista de vendedores: " + vendedores.toString();
+        return  "Datos del Jefe De Zona:\n" + super.toString() + "\nDatos del coche del jefe: " + coche_empresa.toString() + "\nSecretario del jefe: " + secretario.toString() + "\nLista de vendedores del jefe:" + vendedores.toString();
     }
 }
 

@@ -44,6 +44,13 @@ public class Vendedor extends Empleado{
         this.incrementoSalario = incrementoSalario;
     }
 
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
 
     //Regitrar un cliente a la lista de clientes
     public void darAltaCliente(ArrayList<Cliente> clientes){

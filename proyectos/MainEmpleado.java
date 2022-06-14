@@ -1,7 +1,10 @@
 package proyectos;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class MainEmpleado {
+    static Secretario secretario = null;
+
     //Array para los DNI registrados en las areas
     static ArrayList<String> DNIS_registrados = new ArrayList<>();
     //Aarray para los DNI registrados en empleados
@@ -391,13 +394,16 @@ public class MainEmpleado {
                     "\n3-Registrar Jefe De Zona" +
                     "\n4-Agregar o eliminar vendedores al Jefe De Zona" +
                     "\n5-Cambiar coche del jefe de zona\n" +
-                    "6-Cambiar secretario a jefe de zona" +
+                    "6-Cambiar secretario a jefe de zona\n" +
                     "7-Salir\n:");
 
             opcion = consola.nextInt();
 
-            if(opcion < 1 || opcion > 6){
+            if(opcion < 1 || opcion > 7){
                 System.out.println("Esta opcion no existe.");
+            }
+            else if(opcion == 7){
+                break;
             }
             else{
                 switch (opcion){
@@ -408,127 +414,175 @@ public class MainEmpleado {
 
                     case 2:
                         //Incrementar salario del jefe de zona
+                        consola.nextLine();
+                        boolean verficiar_Salario = false;
+                        if(jefe.size() == 0){
+                            System.out.println("No hay jefes de zona registrados.");
+                        }
+                        else{
+                            mostrarJefeZona();
+                            System.out.print("DNI del jefe de zona que desea incrementar salario:");
+                            DNI = consola.nextLine();
+                            for(JefeDeZona buscar_jefe : jefe){
+                                if(buscar_jefe.getDNI().equals(DNI)){
+                                    verficiar_Salario = true;
+                                    buscar_jefe.incrementarSalario();
+                                }
+                                else{
+                                    verficiar_Salario = false;
+                                }
+                            }
+
+                            if(verficiar_Salario == false){
+                                System.out.println("No se incrementó el salario del jefe\n");
+                            }
+                            else{
+                                System.out.println("Se incrementó el salario del jefe correctamente.\n");
+                            }
+                        }
+
                         break;
 
                     case 3:
                         //Registrar jefe de zona
                         consola.nextLine();
                         String despacho;
-                        System.out.print("Dame el DNI del empleado que desea pasar a Jefe De Zona:");
-                        DNI = consola.nextLine();
-                        if(DNIS_registrados.contains(DNI)){
-                            verificar_DNI = true;
+                        if(secretarios.size() == 0){
+                            System.out.println("No se puede registrar un Jefe de zona sin haber almenos un secretario.");
                         }
                         else{
-                            verificar_DNI = false;
-                        }
+                            System.out.print("Dame el DNI del empleado que desea pasar a Jefe De Zona:");
+                            DNI = consola.nextLine();
+                            if(DNIS_registrados.contains(DNI)){
+                                verificar_DNI = true;
+                            }
+                            else{
+                                verificar_DNI = false;
+                            }
 
-                        if(verificar_DNI = true){
-                            System.out.println("Este DNI ya está registrado en algunas de estas areas : Secretario,Vendedor,Jefe de zona.");
-                        }
-                        else{
-                            for(Empleado buscar_empleado: empleados){
-                                if(buscar_empleado.getDNI().equals(DNI)){
-                                    System.out.println("Se encontro el empleado.");
-                                    System.out.print("Nombre del despacho para el Jefe:");
-                                    despacho = consola.nextLine();
-                                    System.out.print("Matricula del coche para el jefe:");
-                                    String matricula = consola.nextLine();
-                                    System.out.print("Marca del coche para el jefe:");
-                                    String marca = consola.nextLine();
-                                    System.out.print("Modelo del coche para el jefe:");
-                                    String modelo = consola.nextLine();
-                                    Coche coche = new Coche(matricula,marca,modelo);
-                                    Secretario secretario = null;
-                                    mostrarSecretarios();
-                                    System.out.print("Esta es la lista de secretarios, elija el DNI de cual desea para el jefe de zona:");
-                                    DNI = consola.nextLine();
-                                    boolean verficiar_secretario = false;
-                                    for(Secretario buscar_secre : secretarios){
-                                        if(buscar_secre.getDNI().equals(DNI)){
-                                            verficiar_secretario = true;
-                                            secretario = new Secretario(buscar_secre.getNombre(), buscar_secre.getApellido(), buscar_secre.getDNI(), buscar_secre.getDireccion(), buscar_secre.getAñosAntiguedad(), buscar_secre.getTelefono(), buscar_secre.getSalario(), buscar_secre.getDespacho(), buscar_secre.getNumeroFax());
+                            if(verificar_DNI == true){
+                                System.out.println("Este DNI ya está registrado en algunas de estas areas : Secretario,Vendedor,Jefe de zona.");
+                            }
+
+                            else{
+                                for(Empleado buscar_empleado: empleados){
+                                    if(buscar_empleado.getDNI().equals(DNI)){
+                                        verf = true;
+                                        DNIS_registrados.add(DNI);
+                                        System.out.println("Se encontro el empleado.");
+                                        System.out.print("Nombre del despacho para el Jefe:");
+                                        despacho = consola.nextLine();
+                                        System.out.print("Matricula del coche para el jefe:");
+                                        String matricula = consola.nextLine();
+                                        System.out.print("Marca del coche para el jefe:");
+                                        String marca = consola.nextLine();
+                                        System.out.print("Modelo del coche para el jefe:");
+                                        String modelo = consola.nextLine();
+                                        Coche coche = new Coche(matricula,marca,modelo);
+                                        mostrarSecretarios();
+                                        System.out.print("Esta es la lista de secretarios, elija el DNI de cual desea para el jefe de zona:");
+                                        DNI = consola.nextLine();
+                                        boolean verficiar_secretario = false;
+                                        for(Secretario buscar_secre : secretarios){
+                                            if(buscar_secre.getDNI().equals(DNI)){
+                                                verficiar_secretario = true;
+                                                secretario = new Secretario(buscar_secre.getNombre(), buscar_secre.getApellido(), buscar_secre.getDNI(), buscar_secre.getDireccion(), buscar_secre.getAñosAntiguedad(), buscar_secre.getTelefono(), buscar_secre.getSalario(), buscar_secre.getDespacho(), buscar_secre.getNumeroFax());
+                                            }
+                                            else{
+                                                verficiar_secretario = false;
+                                            }
                                         }
+                                        if (verficiar_secretario == false) {
+                                            System.out.println("No se encontro el secretario");
+                                        }
+
                                         else{
-                                            verficiar_secretario = false;
+                                            JefeDeZona jefezona = new JefeDeZona(buscar_empleado.getNombre(), buscar_empleado.getApellido(), buscar_empleado.getDNI(), buscar_empleado.direccion, buscar_empleado.añosAntiguedad, buscar_empleado.telefono, buscar_empleado.salario, despacho, secretario, coche, vendedores);
+                                            jefe.add(jefezona);
+                                            System.out.println("Jefe de zona ha sido añadido correctamente\n");
                                         }
-                                    }
-                                    if (verficiar_secretario == false) {
-                                        System.out.println("No se encontro el secretario");
+                                        break;
                                     }
 
                                     else{
-                                        JefeDeZona jefezona = new JefeDeZona(buscar_empleado.getNombre(), buscar_empleado.getApellido(), buscar_empleado.getDNI(), buscar_empleado.direccion, buscar_empleado.añosAntiguedad, buscar_empleado.telefono, buscar_empleado.salario, despacho, secretario, coche, vendedores);
-                                        jefe.add(jefezona);
-                                        System.out.println("Jefe de zona ha sido añadido correctamente\n");
+                                        verf = false;
                                     }
+                                }
+                                if(verf == false){
+                                    System.out.println("No se encontro el empleado con DNI " + DNI);
+                                }
+                                else{
+                                    ;
                                 }
                             }
                         }
+
                         break;
 
                     case 4:
+                        consola.nextLine();
+                        boolean verificar_vendedor = false;
                         //Agregamos o eliminamos vendedores al jefe de zona
-                        System.out.print("Dame el DNI del jefe de zona al que deseas agregar o eliminar vendedores:");
-                        DNI = consola.nextLine();
 
-                        for(JefeDeZona buscar : jefe){
-                            if(buscar.getDNI().equals(DNI)){
-                                verificar_DNI = true;
-                                while(true){
-                                    System.out.print("1-Agregar vendedor\n2-Eliminar vendedor\n3-Salir");
-                                    opcion = consola.nextInt();
-                                    if(opcion == 1){
-                                        //Agregar vendedor
-                                        mostrarVendedores();
-                                        //Incompleto,toca seguir
-                                        System.out.println("Estos son los vendedores,escriba el DNI del vendedor que desea agregar: ");
-                                        DNI = consola.nextLine();
+                        if(jefe.size() == 0){
+                            System.out.println("No hay jefes de zona registrados.\n");
+                        }
+                        else{
+                            mostrarJefeZona();
+                            System.out.print("Dame el DNI del jefe de zona al que deseas agregar o eliminar vendedores:");
+                            DNI = consola.nextLine();
 
-                                        for(Vendedor buscar_vendedor :  vendedores){
-                                            if(buscar_vendedor.getDNI().equals(DNI)){
-                                                //
+                            for(JefeDeZona buscar : jefe){
+                                if(buscar.getDNI().equals(DNI)){
+                                    verificar_DNI = true;
+                                    while(true){
+                                        System.out.print("1-Agregar vendedor\n2-Eliminar vendedor\n3-Salir");
+                                        opcion = consola.nextInt();
+                                        if(opcion == 1){
+                                            //Agregar vendedor
+                                            if(vendedores.size() == 0){
+                                                System.out.println("No hay vendedores registrados.\n");
                                             }
                                             else{
-
+                                                buscar.darDeAltaVendedor(vendedores);
                                             }
                                         }
+                                        else if(opcion == 2){
+                                            //Eliminar vendedor
+                                            if(vendedores.size() == 0){
+                                                System.out.println("No hay vendedores registrados.\n");
+                                            }
+                                            else{
+                                                buscar.darDeBajaVendedor(vendedores);
+                                            }
+                                        }
+                                        else if(opcion == 3){
+                                            break;
+                                        }
+                                        else{
+                                            System.out.println("Esta opcion no existe.");
+                                        }
                                     }
-                                    else if(opcion == 2){
-                                        //Eliminar vendedor
-                                    }
-                                    else if(opcion == 3){
-                                        break;
-                                    }
-                                    else{
-                                        System.out.println("Esta opcion no existe.");
-                                    }
+                                    break;
+                                }
+                                else{
+                                    verificar_DNI = false;
                                 }
                                 break;
                             }
+                            if(verificar_DNI == false){
+                                System.out.println("No se encontró el DN1 " + DNI + " del jefe de zona.\n");
+                            }
                         }
-                        while(true){
-                            System.out.print("1-Agregar vendedor a jefe de zona\n2-Eliminar vendedor a jefe de zona\n3-Salir\n:");
 
-                            if(opcion == 1){
-                                //Agregamos vendedor a jefe de zona
-                            }
-                            else if(opcion == 2){
-                                //Eliminamos vendedor a jefe de zona
-                            }
-                            else if(opcion == 3){
-                                break;
-                            }
-                            else{
-                                System.out.println("Esta opcion no existe.");
-                            }
-                        }
                         break;
 
                     case 5:
+                        consola.nextLine();
                         break;
 
                     case 6:
+                        consola.nextLine();
                         System.out.print("Dame el DNI del jefe de zona al que deseas cambiar secretario");
                         DNI = consola.nextLine();
 
@@ -590,13 +644,7 @@ public class MainEmpleado {
                     break;
                 case 4:
                     //Asignar empleado a Jefe De Zona
-                    if(contador_jefe == 0){
-                        registrarJefeZona();
-                    }
-                    else{
-                        System.out.println("Solo puede haber un jefe de zona.");
-                    }
-                    contador_jefe++;
+                    registrarJefeZona();
                     break;
             }
 
@@ -634,6 +682,7 @@ public class MainEmpleado {
 
         for(JefeDeZona ver_jefe : jefe){
             System.out.println(ver_jefe.toString());
+            System.out.println("<<------------------------->>");
         }
     }
 }
