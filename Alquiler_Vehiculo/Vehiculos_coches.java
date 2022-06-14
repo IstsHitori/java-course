@@ -2,9 +2,11 @@ package Alquiler_Vehiculo;
 
 public class Vehiculos_coches extends Vehiculos{
     private float suma_precio_base = 1.5F;
+    private int plaza;
 
-    public Vehiculos_coches(String matricula,String marca,String modelo){
+    public Vehiculos_coches(String matricula,String marca,String modelo,int plaza){
         super(matricula, marca, modelo);
+        this.plaza = plaza;
     }
 
     public float getSuma_precio_base() {
@@ -15,11 +17,21 @@ public class Vehiculos_coches extends Vehiculos{
         this.suma_precio_base = suma_precio_base;
     }
 
-    public float precioTotal(){
-        
+    public int getPlaza() {
+        return plaza;
+    }
+
+    public void setPlaza(int plaza) {
+        this.plaza = plaza;
+    }
+
+    public float precioTotal(int dias){
+        float precio = (super.getPrecio_dia() * dias) + ((suma_precio_base * dias) + (suma_precio_base * plaza));
+
+        return precio;
     }
     @Override
     public String toString(){
-        return "\nVehiculo coche:\n" + super.toString() + "\nPrecio total:" + precioTotal();
+        return "\nVehiculo coche:\n" + super.toString();
     }
 }

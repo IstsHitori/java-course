@@ -47,7 +47,7 @@ public abstract class Vehiculos {
         this.precio_dia = precio_dia;
     }
 
-    public abstract float precioTotal();
+    public abstract float precioTotal(int dias);
     @Override
     public String toString(){
         return "Matricula:" + matricula + "\nMarca:" + marca + "\nModelo:" + modelo;

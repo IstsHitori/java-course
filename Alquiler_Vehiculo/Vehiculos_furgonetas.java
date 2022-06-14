@@ -24,4 +24,15 @@ public class Vehiculos_furgonetas extends Vehiculos{
     public void setPMA(float PMA) {
         this.PMA = PMA;
     }
+
+    @Override
+    public float precioTotal(int dias) {
+        float precio = ((dias * super.getPrecio_dia()) + (precio_suma * PMA));
+        return precio;
+    }
+
+    @Override
+    public String toString(){
+        return "\nCoche furgoneta:\n" + super.toString();
+    }
 }

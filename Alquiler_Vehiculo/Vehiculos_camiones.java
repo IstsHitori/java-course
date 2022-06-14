@@ -14,4 +14,15 @@ public class Vehiculos_camiones extends Vehiculos{
     public void setSuma_precio(float suma_precio) {
         this.suma_precio = suma_precio;
     }
+
+    @Override
+    public float precioTotal(int dias) {
+        float precio = suma_precio + (dias * super.getPrecio_dia());
+        return precio;
+    }
+
+    @Override
+    public String toString(){
+        return "\nVehiculo camion:\n" + super.toString();
+    }
 }

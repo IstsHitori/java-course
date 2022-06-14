@@ -33,8 +33,8 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public void añadeVehiculo(ArrayList<Vehiculos> vehiculos){
-        int opcion;
+     public void añadeVehiculo(ArrayList<Vehiculos> vehiculos){
+        int opcion,plaza;
         String matricula,marca,modelo;
 
         while(true){
@@ -57,8 +57,9 @@ public class Empleado {
                 matricula = JOptionPane.showInputDialog("Matricula del coche:");
                 marca = JOptionPane.showInputDialog("Marca del coche:");
                 modelo = JOptionPane.showInputDialog("Modelo del coche:");
+                plaza = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor de la plaza:"));
 
-                Vehiculos_coches coche = new Vehiculos_coches(matricula,marca,modelo);
+                Vehiculos_coches coche = new Vehiculos_coches(matricula,marca,modelo,plaza);
                 vehiculos.add(coche);
                 break;
 
@@ -67,8 +68,10 @@ public class Empleado {
                 matricula = JOptionPane.showInputDialog("Matricula del coche:");
                 marca = JOptionPane.showInputDialog("Marca del coche:");
                 modelo = JOptionPane.showInputDialog("Modelo del coche:");
+                plaza = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor de la plaza"));
 
-                Vehiculos_microbuses microbuses = new Vehiculos_microbuses(matricula,marca,modelo);
+
+                Vehiculos_microbuses microbuses = new Vehiculos_microbuses(matricula,marca,modelo,plaza);
                 vehiculos.add(microbuses);
                 break;
 
@@ -100,7 +103,7 @@ public class Empleado {
     public void obtenerPrecioAlquiler(ArrayList<Vehiculos> vehiculos){
         boolean verificar_coche = false;
         String matricula;
-        int dias;
+        int dias = 0;
         float precio = 0;
         System.out.println("Datos de los vehiculos:");
         for(Vehiculos mostrar : vehiculos){
@@ -113,12 +116,12 @@ public class Empleado {
         for(Vehiculos buscar_matricula : vehiculos){
             if(buscar_matricula.getMatricula().equals(matricula)){
                 verificar_coche = true;
-                precio = buscar_matricula.getPrecio_dia();
+                dias = Integer.parseInt(JOptionPane.showInputDialog("Ingrese los días que ha durado el alquiler:"));
+                precio = buscar_matricula.precioTotal(dias);
             }
         }
         if(verificar_coche == true){
-            dias = Integer.parseInt(JOptionPane.showInputDialog("Ingrese los días que ha durado el alquiler:"));
-            JOptionPane.showMessageDialog(null,"El precio del alquiler del coche con matricula: " + matricula + " es de: " + (precio * dias));
+            JOptionPane.showMessageDialog(null,"El precio del alquiler del coche con matricula: " + matricula + " es de: " + precio);
         }
         else{
             JOptionPane.showMessageDialog(null,"No existe este vehículo en la lista de vehículos registrados.");
@@ -132,8 +135,9 @@ public class Empleado {
         dias = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de dias del alquiler: "));
 
         for(Vehiculos mostrar_precio : vehiculos){
-            System.out.println("La matricula del " + (i+1) + " es " + mostrar_precio.getMatricula());
-            //Incompleto, toca seguir con los precios. dependiendo del tipo de vehiculo
+            System.out.println("La matricula del vehiculo " + (i+1) + " es " + mostrar_precio.getMatricula());
+            System.out.println("El precio de alquiler del vehiculo " + (i+1) +  " con matricula " + mostrar_precio.getMatricula() + " es de :" +  mostrar_precio.precioTotal(dias));
+            System.out.println("<<<------------------------------------------------------------->>>");
         }
     }
 }
