@@ -6,6 +6,8 @@ public abstract class Vehiculos {
     private String modelo;
     private float precio_dia = 50;
 
+
+
     public Vehiculos(){
 
     }
