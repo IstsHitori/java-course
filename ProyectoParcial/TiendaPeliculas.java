@@ -6,7 +6,6 @@ public abstract class TiendaPeliculas {
     private String nombrePelicula;
     private String iD_pelicula;
     private float precioPelicula = 5;
-    private int dias;
 
     public static Scanner consola = new Scanner(System.in);
 
@@ -14,13 +13,6 @@ public abstract class TiendaPeliculas {
 
     }
 
-    //Constructor para arrrendar pelicula
-    public TiendaPeliculas(String nombrePelicula, String iD_pelicula, float precioPelicula, int dias) {
-        this.nombrePelicula = nombrePelicula;
-        this.iD_pelicula = iD_pelicula;
-        this.precioPelicula = precioPelicula;
-        this.dias = dias;
-    }
     //Constructor para crear Pelicula
     public TiendaPeliculas(String nombrePelicula,String iD_pelicula, float precioPelicula){
         this.nombrePelicula = nombrePelicula;
@@ -52,13 +44,6 @@ public abstract class TiendaPeliculas {
         this.precioPelicula = precioPelicula;
     }
 
-    public int getDias() {
-        return dias;
-    }
-
-    public void setDias(int dias) {
-        this.dias = dias;
-    }
 
     public abstract float precioTotal();
 

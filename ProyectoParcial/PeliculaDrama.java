@@ -7,11 +7,6 @@ public class PeliculaDrama extends TiendaPeliculas{
 
     }
 
-    //Constructor para arrendar la pelicula
-    public PeliculaDrama(String nombrePelicula, String iD_pelicula,int dias){
-        super(nombrePelicula,iD_pelicula,5,dias);
-
-    }
 
     //Constructor para crear pelicula
     public PeliculaDrama(String nombrePelicula,String iD_pelicula){

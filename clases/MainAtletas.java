@@ -1,16 +1,21 @@
 package clases;
 import java.util.Scanner;
 public class MainAtletas {
-
-    public static int recordAtleta(Atletas atletas[]){
+    static float Tiempo[] = new float[5];
+    public static int recordAtleta(Atletas atletas[]) {
         int indice = 0;
 
         float atleta = atletas[0].getNtiempo();
 
         for(int i = 0; i < atletas.length; i++){
+            /*
             if(atletas[i].getNtiempo() > atleta){
                 atleta = atletas[i].getNtiempo();
                 indice = i;
+            }
+             */
+            if(atletas[i].getNtiempo() < atleta){
+                Tiempo[i] = atletas[i].getNtiempo();
             }
         }
 
