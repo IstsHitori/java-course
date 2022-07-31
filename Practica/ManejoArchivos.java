@@ -63,5 +63,13 @@ public class ManejoArchivos {
             //System.out.println("No se encontro el archivo " + ex2);
         //}
     //}
-
+    public static void eliminarArchivo(String ruta){
+        File file = new File(ruta);
+        if(file.exists() == true){
+            file.delete();
+            System.out.println("Se elimino el archivo.");
+        }else{
+            System.out.println("El archivo no existe.");
+        }
+    }
 }
