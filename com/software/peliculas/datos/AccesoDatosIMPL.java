@@ -48,9 +48,6 @@ public class AccesoDatosIMPL implements IAccesoDatos{
             salida.println(pelicula.toString());
             salida.close();
 
-            System.out.println("");
-            System.out.println("Se ha añadido la pelicula: " + pelicula);
-            System.out.println("");
         }catch (IOException exception){
             exception.printStackTrace(System.out);
             throw new EscrituraDatosExcepciones("Excepcion al escribir en el archivo: " + exception.getMessage());

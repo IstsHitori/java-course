@@ -34,7 +34,8 @@ public class ControlPeliculasIMPL implements IControlPeliculas{
             List<Pelicula> peliculas = this.datos.listar(NOMRBRE_RECURSO);
 
             for(Pelicula pelicula : peliculas){
-                System.out.print("Pelicula: " + pelicula);
+                System.out.print(pelicula);
+                System.out.println("");
             }
         }catch (AccesoDatosExcepciones excepcion){
             System.out.println("\nError de acceso a datos");
